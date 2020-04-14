@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Edit film</title>
+</head>
+<body>
+	<h1>Edit film data</h1>
+		<form th:object="${film}" th:action="@{/save}" action="#" method="post">
+			<table>
+			<tr>
+				<td><input type="hidden" th:field="${film.filmId}" /></td>
+			</tr>
+			<tr>
+				<td>Title: <input type="text" th:field="${film.title}" /></td>
+				<td th:if="${#fields.hasErrors('title')}" th:errors="${film.title}">Error</td>
+			</tr>
+			<tr>
+				<td>Director: <input type="text" th:field="${film.director}" /></td>
+				<td th:if="${#fields.hasErrors('director')}" th:errors="${film.director}">Error</td>
+			</tr>
+			<tr>
+				<td>Year: <input type="text" th:field="${film.year}" /></td>
+				<td th:if="${#fields.hasErrors('year')}" th:errors="${film.year}">Error</td>
+			</tr>
+			<tr>
+				<td>Description: <textarea rows="5" cols="30" th:field="${film.description}" /></textarea></td>
+			</tr>
+			<tr>
+				<td>Lead roles: <textarea rows="3" cols="30" th:field="${film.leadroles}" /></textarea></td>
+			</tr>
+			<tr>
+				<td>IMDb rating: <input type="text" th:field="${film.imdb}" /></td>
+				<td th:if="${#fields.hasErrors('imdb')}" th:errors="${film.imdb}">Error</td>
+			</tr>
+			<tr>
+				<td>Genre: </td>
+			</tr>
+			</table>
+			<input type="submit" value="Save" />
+		</form>
+</body>
+</html>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -29,8 +30,8 @@ public class FilmController {
 	// listing of films
 	@RequestMapping(value = "/filmlist", method = RequestMethod.GET)
 	public String getFilms(Model model) {
-		List<Film> films = (List<Film>) filmRepository.findAll(); // fetch films from database
-		model.addAttribute("films", films); // model object exposes list of films to template
+		List<Film> films = (List<Film>) filmRepository.findAll(); // fetching films from database
+		model.addAttribute("films", films); 	// model object exposes list of films to template
 		return "filmlist";
 	}
 	
@@ -45,11 +46,25 @@ public class FilmController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String saveFilm(@Valid Film film, BindingResult bindingResult) { //@ModelAttribute Film film
 		if (bindingResult.hasErrors()) {		// checking form data validness
-			return "addfilm";
+			return "editfilm";
 		}
 		filmRepository.save(film);				// save film to database
 		return "redirect:/filmlist";			// returning to listing of films
 	}
+	
+	// deleting a film entry from the list
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	public String deleteFilm(@PathVariable("id") Long filmId) {
+		filmRepository.deleteById(filmId);		// removing a film from database by id
+		return "redirect:../filmlist";			// returning to listing of films
+	}
+	
+	// editing a film entry
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+	public String editFilm(@PathVariable("id") Long filmId, Model model) {
+		model.addAttribute("film", filmRepository.findById(filmId)); // fetching film by id, and exposing to template
+		return "editfilm";
+	}	
 
 }
 //Controller-luokan metodi + Thymeleaf-template, testaus

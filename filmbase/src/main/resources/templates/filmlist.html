@@ -26,8 +26,8 @@
 			<td th:text="${film.leadroles}">Lead roles</td>
 			<td th:text="${film.imdb}">IMDb rating</td>
 			<td>Genre</td>
-			<td></td>
-			<td></td>
+			<td><a th:href="@{/edit/{id}(id=${film.filmId})}" class="btn btn-primary">Edit</a></td>
+			<td><a th:href="@{/delete/{id}(id=${film.filmId})}" class="btn btn-danger">Delete</a></td>
 		</tr>
 	</table>
 	<a href="/addfilm" >Add Film</a>
