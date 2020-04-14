@@ -64,7 +64,7 @@ public class FilmController {
 	public String editFilm(@PathVariable("id") Long filmId, Model model) {
 		model.addAttribute("film", filmRepository.findById(filmId)); // fetching film by id, and exposing to template
 		return "editfilm";
-	}	
+	}
 
 }
 //Controller-luokan metodi + Thymeleaf-template, testaus

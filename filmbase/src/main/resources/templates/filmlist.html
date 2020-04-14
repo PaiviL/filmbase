@@ -2,11 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 	<title>Filmlist</title>
 </head>
 <body>
+	<div class="container">
 	<h1>Listing of Films</h1>
-		<table >
+	</div>
+		<table class="table table-striped">
 		<tr>
 			<th>Title</th>
 			<th>Director</th>
@@ -30,6 +33,8 @@
 			<td><a th:href="@{/delete/{id}(id=${film.filmId})}" class="btn btn-danger">Delete</a></td>
 		</tr>
 	</table>
-	<a href="/addfilm" >Add Film</a>
+	<div class="container">
+	<a href="/addfilm" class="btn btn-success" >Add Film</a>
+	</div>
 </body>
 </html>

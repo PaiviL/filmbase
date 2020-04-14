@@ -2,42 +2,54 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Edit film</title>
+	<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
+	<title>Edit Film</title>
 </head>
 <body>
-	<h1>Edit film data</h1>
+<div class="container">
+	<h1>Edit Film data</h1>
 		<form th:object="${film}" th:action="@{/save}" action="#" method="post">
-			<table>
-			<tr>
-				<td><input type="hidden" th:field="${film.filmId}" /></td>
-			</tr>
-			<tr>
-				<td>Title: <input type="text" th:field="${film.title}" /></td>
-				<td th:if="${#fields.hasErrors('title')}" th:errors="${film.title}">Error</td>
-			</tr>
-			<tr>
-				<td>Director: <input type="text" th:field="${film.director}" /></td>
-				<td th:if="${#fields.hasErrors('director')}" th:errors="${film.director}">Error</td>
-			</tr>
-			<tr>
-				<td>Year: <input type="text" th:field="${film.year}" /></td>
-				<td th:if="${#fields.hasErrors('year')}" th:errors="${film.year}">Error</td>
-			</tr>
-			<tr>
-				<td>Description: <textarea rows="5" cols="30" th:field="${film.description}" /></textarea></td>
-			</tr>
-			<tr>
-				<td>Lead roles: <textarea rows="3" cols="30" th:field="${film.leadroles}" /></textarea></td>
-			</tr>
-			<tr>
-				<td>IMDb rating: <input type="text" th:field="${film.imdb}" /></td>
-				<td th:if="${#fields.hasErrors('imdb')}" th:errors="${film.imdb}">Error</td>
-			</tr>
-			<tr>
-				<td>Genre: </td>
-			</tr>
-			</table>
-			<input type="submit" value="Save" />
+			<div class="form-group">
+    			<input type="hidden" th:field="${film.filmId}" class="form-control"></input>
+  			</div>
+			<div class="form-group">
+    			<label for="title">Title:</label>
+    			<input type="text" th:field="${film.title}" class="form-control" id="title">
+    			<p th:if="${#fields.hasErrors('title')}" th:errors="${film.title}"  class="text-danger" >Error</p>
+  			</div>
+  			<div class="form-group">
+    			<label for="director">Director:</label>
+    			<input type="text" th:field="${film.director}" class="form-control" id="director">
+    			<p th:if="${#fields.hasErrors('director')}" th:errors="${film.director}"  class="text-danger" >Error</p>
+  			</div>
+  			<div class="form-group">
+    			<label for="year">Year:</label>
+    			<input type="text" th:field="${film.year}" class="form-control" id="year">
+    			<p th:if="${#fields.hasErrors('year')}" th:errors="${film.year}"  class="text-danger" >Error</p>
+  			</div>
+  			<div class="form-group">
+    			<label for="description">Description:</label>
+    			<textarea rows="4" th:field="${film.description}" class="form-control" id="description" /></textarea>
+    			
+  			</div>
+  			<div class="form-group">
+    			<label for="leadroles">Lead roles:</label>
+    			<textarea rows="2" th:field="${film.leadroles}" class="form-control" id="leadroles" /></textarea>
+    			
+  			</div>
+  			<div class="form-group">
+    			<label for="imdb">IMDb rating:</label>
+    			<input type="text" th:field="${film.imdb}" class="form-control" id="imdb">
+    			<p th:if="${#fields.hasErrors('imdb')}" th:errors="${film.imdb}" class="text-danger" >Error</p>
+  			</div>
+<!-- 		<div class="form-group">
+    			<label for="genre">Genre:</label>
+    			<input type="text" th:field="${film.genre}" class="form-control" id="genre">
+    			<p th:if="${#fields.hasErrors('genre')}" th:errors="${film.genre}">Error</p>
+  			</div> -->
+  			
+  			<input type="submit" class="btn btn-success" value="Save" /></input>
 		</form>
+</div>		
 </body>
 </html>
