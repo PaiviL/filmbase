@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 	<title>Add Film</title>
 </head>
 <body>
@@ -30,23 +30,24 @@
   			<div class="form-group">
     			<label for="description">Description:</label>
     			<textarea rows="4" th:field="${film.description}" class="form-control" id="description" /></textarea>
-    			<p th:if="${#fields.hasErrors('description')}" th:errors="${film.description}">Error</p>
+
   			</div>
   			<div class="form-group">
     			<label for="leadroles">Lead roles:</label>
     			<textarea rows="2" th:field="${film.leadroles}" class="form-control" id="leadroles" /></textarea>
-    			<p th:if="${#fields.hasErrors('leadroles')}" th:errors="${film.leadroles}">Error</p>
+
   			</div>
   			<div class="form-group">
     			<label for="imdb">IMDb rating:</label>
     			<input type="text" th:field="${film.imdb}" class="form-control" id="imdb">
     			<p th:if="${#fields.hasErrors('imdb')}" th:errors="${film.imdb}" class="text-danger" >Error</p>
   			</div>
-<!-- 		<div class="form-group">
+	 		<div class="form-group">
     			<label for="genre">Genre:</label>
-    			<input type="text" th:field="${film.genre}" class="form-control" id="genre">
-    			<p th:if="${#fields.hasErrors('genre')}" th:errors="${film.genre}">Error</p>
-  			</div> -->
+    			<select th:field="${film.genre}" class="form-control" id="genre">
+					<option th:each="genre: ${genres}" th:value="${genre.genreId}" th:text="${genre.genreName}"></option>
+				</select>
+  			</div>
     			
     		<input type="submit" class="btn btn-success" value="Save" /></input>
 		</form>

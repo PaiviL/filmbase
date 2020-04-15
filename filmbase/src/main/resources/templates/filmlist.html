@@ -8,6 +8,7 @@
 <body>
 	<div class="container">
 	<h1>Listing of Films</h1>
+	<p><a href="/genrelist" >Listing of Genres</a></p>
 	</div>
 		<table class="table table-striped">
 		<tr>
@@ -28,13 +29,14 @@
 			<td th:text="${film.description}">Description</td>
 			<td th:text="${film.leadroles}">Lead roles</td>
 			<td th:text="${film.imdb}">IMDb rating</td>
-			<td>Genre</td>
+			<td th:text="${film.genre.genreName}">Genre</td>
 			<td><a th:href="@{/edit/{id}(id=${film.filmId})}" class="btn btn-primary">Edit</a></td>
 			<td><a th:href="@{/delete/{id}(id=${film.filmId})}" class="btn btn-danger">Delete</a></td>
 		</tr>
 	</table>
 	<div class="container">
-	<a href="/addfilm" class="btn btn-success" >Add Film</a>
+		<a href="/addfilm" class="btn btn-success" >Add Film</a>
 	</div>
+	
 </body>
 </html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+	<title>Genrelist</title>
+</head>
+<body>
+	<div class="container">
+	<h1>Listing of Genres</h1>
+	<p><a href="/filmlist" >Listing of Films</a></p>
+	</div>
+		<table class="table table-striped">
+		<tr>
+			<th>Genre Id</th>
+			<th>Genre Name</th>
+			<th></th>
+		</tr>
+		<tr th:each="genre : ${genres}">
+			<td th:text="${genre.genreId}">Genre Id</td>
+			<td th:text="${genre.genreName}">Genre Name</td>
+	 		<td><a th:href="@{/deletegenre/{id}(id=${genre.genreId})}" class="btn btn-danger">Delete</a></td>
+		</tr>
+	</table>
+	<div class="container">
+		<a href="/addgenre" class="btn btn-success" >Add Genre</a>
+	</div>
+	
+</body>
+</html>

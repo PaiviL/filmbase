@@ -4,10 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Film {
@@ -16,7 +19,6 @@ public class Film {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long filmId;
 	
-	@NotNull
 	@Size(min=1, max=100)
 	private String title;
 	
@@ -27,10 +29,16 @@ public class Film {
 	private int year;
 	
 	private String description;
+	
 	private String leadroles;
 	
 	@Min(1) @Max(10)
 	private double imdb;
+	
+	@ManyToOne
+	//@JsonIgnore
+	@JoinColumn(name = "genreId")
+	private Genre genre;
 	
 	//constructors
 	public Film() {
@@ -38,7 +46,7 @@ public class Film {
 	}
 
 	public Film(String title, String director, int year, String description, String leadroles,
-			double imdb) {
+			double imdb, Genre genre) {
 		super();
 		this.title = title;
 		this.director = director;
@@ -46,10 +54,11 @@ public class Film {
 		this.description = description;
 		this.leadroles = leadroles;
 		this.imdb = imdb;
+		this.genre = genre;
 	}
 
 	public Film(Long filmId, String title, String director, int year, String description, String leadroles,
-			double imdb) {
+			double imdb, Genre genre) {
 		super();
 		this.filmId = filmId;
 		this.title = title;
@@ -58,6 +67,7 @@ public class Film {
 		this.description = description;
 		this.leadroles = leadroles;
 		this.imdb = imdb;
+		this.genre = genre;
 	}
 
 	//getters and setters
@@ -117,11 +127,18 @@ public class Film {
 		this.imdb = imdb;
 	}
 
-	//toString
+	public Genre getGenre() {
+		return genre;
+	}
+
+	public void setGenre(Genre genre) {
+		this.genre = genre;
+	}
+
 	@Override
 	public String toString() {
 		return "Film [filmId=" + filmId + ", title=" + title + ", director=" + director + ", year=" + year
-				+ ", description=" + description + ", leadroles=" + leadroles + ", imdb=" + imdb + "]";
+				+ ", description=" + description + ", leadroles=" + leadroles + ", imdb=" + imdb + ", genre=" + this.getGenre() + "]";
 	}
-
+	
 }
