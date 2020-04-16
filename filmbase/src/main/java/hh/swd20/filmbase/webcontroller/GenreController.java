@@ -21,6 +21,7 @@ public class GenreController {
 	@Autowired
 	private GenreRepository genreRepository;
 	
+	// listing of genres
 	@RequestMapping(value = "/genrelist", method = RequestMethod.GET)
 	public String getGenres(Model model) {
 		List<Genre> genres = (List<Genre>) genreRepository.findAll();
@@ -28,12 +29,14 @@ public class GenreController {
 		return "genrelist";
 	}
 	
+	// creating an empty form for a new genre
 	@RequestMapping(value = "/addgenre", method = RequestMethod.GET)
 	public String addNewGenre(Model model) {
 		model.addAttribute("genre", new Genre());
 		return "addgenre";
 	}
 	
+	// saving the filled form data
 	@RequestMapping(value = "/savegenre", method = RequestMethod.POST)
 	public String saveGenre(@Valid Genre genre, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {		// checking form data validness
@@ -43,6 +46,7 @@ public class GenreController {
 		return "redirect:/genrelist";
 	}
 	
+	// deleting a genre from the list
 	@RequestMapping(value = "/deletegenre/{id}", method = RequestMethod.GET)
 	public String deleteGenre(@PathVariable("id") Long genreId) {
 		genreRepository.deleteById(genreId);

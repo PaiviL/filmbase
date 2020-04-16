@@ -11,6 +11,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Film {
@@ -35,8 +36,9 @@ public class Film {
 	@Min(1) @Max(10)
 	private double imdb;
 	
+	@JsonIgnore
+	@JsonManagedReference
 	@ManyToOne
-	//@JsonIgnore
 	@JoinColumn(name = "genreId")
 	private Genre genre;
 	

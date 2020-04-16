@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Genre {
 	
@@ -20,6 +22,7 @@ public class Genre {
 	@NotNull
 	private String genreName;
 	
+	@JsonBackReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "genre")
 	private List<Film> films;
 	

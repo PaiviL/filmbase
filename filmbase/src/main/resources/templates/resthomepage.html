@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+	<title>FilmBase</title>
+</head>
+<body>
+<div class="container">
+	<h1>FilmBase REST Home Page</h1>
+	
+	<h3>All Films</h3>
+	<p>Method: <strong>GET</strong> Endpoint: <strong><a href="/films">/films</a></strong></p>
+	<p>JSON Example:</p>
+	<pre><code>
+	[
+	  	{
+		    "filmId": 5,
+		    "title": "The Shawshank Redemption",
+		    "director": "Frank Darabont",
+		    "year": 1994,
+		    "description": "Two imprisoned men bonding over two decades, finding eventual redemption through acts of common decency",
+		    "leadroles": "Tim Robbins, Morgan Freeman, Bob Gunton",
+		    "imdb": 9.3,
+		    "genre": {
+		      "genreId": 1,
+		      "genreName": "Drama"
+		    }
+		},
+	  	{
+	    	"filmId": 6,
+		    "title": "Gone with the Wind",
+		    "director": "Victor Fleming",
+		    "year": 1939,
+		    "description": "The life and romance of strong-willed Scarlett O'Hara during the American Civil War and Reconstruction periods",
+		    "leadroles": "Vivien Leigh, Clark Gable, Thomas Mitchell",
+		    "imdb": 8.1,
+		    "genre": {
+		      "genreId": 1,
+		      "genreName": "Drama"
+		    }
+	  	}
+	]
+	</code></pre>
+
+	<h3>Film by Id</h3>
+	<p>Method: <strong>GET</strong> Endpoint: <strong> /films/{id} <a href="/films/2">/films/2</a></strong></p>
+	<p>JSON Example:</p>
+	<pre><code>	
+	{
+	    "filmId": 6,
+		"title": "Gone with the Wind",
+		"director": "Victor Fleming",
+		"year": 1939,
+		"description": "The life and romance of strong-willed Scarlett O'Hara during the American Civil War and Reconstruction periods",
+		"leadroles": "Vivien Leigh, Clark Gable, Thomas Mitchell",
+		"imdb": 8.1,
+		"genre": {
+		   "genreId": 1,
+		   "genreName": "Drama"
+		}
+	}
+	</code></pre>
+	
+	<h3>Add new Film</h3>
+	<p>Method: <strong>POST</strong> Endpoint: <strong><a href="/films">/films</a></strong> 
+	(Test with <a href="https://www.postman.com/" target="_blank">PostMan</a>)</p>
+	<p>JSON Example:</p>
+	<pre><code>	
+	{
+		"title": "Titanic",
+		"director": "James Cameron",
+		"year": 1997,
+		"description": "A young aristocrat lady falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S.Titanic",
+		"leadroles": "Leonardo DiCaprio, Kate Winslet, Billy Zane",
+		"imdb": 7.8,
+		"genre": {
+		   "genreId": 2,
+		   "genreName": "Epic/Historical"
+		}
+	}
+	</code></pre>
+	<p></p>
+</div>
+</body>
+</html>
