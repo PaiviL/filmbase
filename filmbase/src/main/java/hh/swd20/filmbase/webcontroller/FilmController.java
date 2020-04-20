@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +28,12 @@ public class FilmController {
 	@RequestMapping("/")
 	public String homepage() {
 		return "index";
+	}
+	
+	// login -page (redirects to listing of films)
+	@RequestMapping(value = "/login")
+	public String login() {
+		return "login";
 	}
 	
 	// listing of films
@@ -58,6 +65,7 @@ public class FilmController {
 	
 	// deleting a film entry from the list
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteFilm(@PathVariable("id") Long filmId) {
 		filmRepository.deleteById(filmId);		// removing a film from database by id
 		return "redirect:../filmlist";			// returning to listing of films
@@ -65,6 +73,7 @@ public class FilmController {
 	
 	// editing a film entry
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String editFilm(@PathVariable("id") Long filmId, Model model) {
 		model.addAttribute("film", filmRepository.findById(filmId)); // fetching film by id, and exposing to template
 		model.addAttribute("genres", genreRepository.findAll());	 // fetching genres, and exposing to template

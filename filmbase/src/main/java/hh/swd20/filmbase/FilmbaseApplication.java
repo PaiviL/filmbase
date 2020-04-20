@@ -11,6 +11,8 @@ import hh.swd20.filmbase.domain.Film;
 import hh.swd20.filmbase.domain.FilmRepository;
 import hh.swd20.filmbase.domain.Genre;
 import hh.swd20.filmbase.domain.GenreRepository;
+import hh.swd20.filmbase.domain.User;
+import hh.swd20.filmbase.domain.UserRepository;
 
 @SpringBootApplication
 public class FilmbaseApplication {
@@ -21,7 +23,7 @@ public class FilmbaseApplication {
 	}
 	// testing data to H2-database
 	@Bean
-	public CommandLineRunner filmDemo(FilmRepository filmRepository, GenreRepository genreRepository) {
+	public CommandLineRunner filmDemo(FilmRepository filmRepository, GenreRepository genreRepository, UserRepository userRepository) {
 		return (args) -> {
 			log.info("save genres testdata");
 			genreRepository.save(new Genre("Drama"));
@@ -39,6 +41,13 @@ public class FilmbaseApplication {
 			filmRepository.save(new Film("Avatar", "James Cameron", 2009, 
 					"On the lush moon of Pandora inhabited by sapient humanoids, an ex-marine on a mission becomes torn between two worlds", 
 					"Sam Worthington, Zoe Saldana, Sigourney Weaver", 7.8, genreRepository.findByGenreName("Sci-fi").get(0)));
+			
+			// create demo users: user/user admin/admin
+			log.info("save users testdata");
+			User user1 = new User("user", "$2a$10$5MFkiynk1j1Osz8e2W3zWue9dDr5TMhh57HrBv/3sODjPqihwR1qS", "USER");
+			User user2 = new User("admin", "$2a$10$y48fM9iHjosJunwGgnSOO.zfUU0fcJoNsIKs7XP1htufFiskUlR/m", "ADMIN");
+			userRepository.save(user1);
+			userRepository.save(user2);
 			
 			log.info("fetch all genres");
 			for (Genre genre : genreRepository.findAll()) {

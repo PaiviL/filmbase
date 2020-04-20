@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -48,6 +49,7 @@ public class GenreController {
 	
 	// deleting a genre from the list
 	@RequestMapping(value = "/deletegenre/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteGenre(@PathVariable("id") Long genreId) {
 		genreRepository.deleteById(genreId);
 		return "redirect:../genrelist";

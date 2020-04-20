@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
@@ -7,8 +7,23 @@
 </head>
 <body>
 	<div class="container">
-	<h1>Listing of Films</h1>
-	<p><a href="/genrelist" >Listing of Genres</a></p>
+	  <div class="row">
+		<div class="col-sm-7">
+			<h1>Listing of Films</h1>
+		</div>
+		<div class="col-sm-3" style="padding:10px">
+			<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]!</h3>
+		</div>
+		<div class="col-sm-2" style="padding:10px">
+			<form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+				<input type="submit" value="Sign Out" class="btn btn-primary"/>
+			</form>
+			<div sec:authorize="isAnonymous()">
+				<a href="/login" class="btn btn-primary">Sign In</a>
+			</div>
+		</div>
+	  </div>
+	  <p><a href="/genrelist" >Listing of Genres</a></p>
 	</div>
 		<table class="table table-striped">
 		<tr>
@@ -19,8 +34,8 @@
 			<th>Lead roles</th>
 			<th>IMDb rating</th>
 			<th>Genre</th>
-			<th></th>
-			<th></th>
+			<th sec:authorize="hasAuthority('ADMIN')"></th>
+			<th sec:authorize="hasAuthority('ADMIN')"></th>
 		</tr>
 		<tr th:each="film : ${films}">
 			<td th:text="${film.title}">Title</td>
@@ -30,8 +45,8 @@
 			<td th:text="${film.leadroles}">Lead roles</td>
 			<td th:text="${film.imdb}">IMDb rating</td>
 			<td th:text="${film.genre.genreName}">Genre</td>
-			<td><a th:href="@{/edit/{id}(id=${film.filmId})}" class="btn btn-primary">Edit</a></td>
-			<td><a th:href="@{/delete/{id}(id=${film.filmId})}" class="btn btn-danger">Delete</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${film.filmId})}" class="btn btn-primary">Edit</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${film.filmId})}" class="btn btn-danger">Delete</a></td>
 		</tr>
 	</table>
 	<div class="container">
