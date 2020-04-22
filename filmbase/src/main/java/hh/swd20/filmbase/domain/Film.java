@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,13 +21,14 @@ public class Film {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long filmId;
 	
+	@NotNull
 	@Size(min=1, max=100)
 	private String title;
 	
 	@Size(min=2, max=30)
 	private String director;
 	
-	@Min(1800) @Max(2020)
+	@Max(2030)
 	private int year;
 	
 	private String description;

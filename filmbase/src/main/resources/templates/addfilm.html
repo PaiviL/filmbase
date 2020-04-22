@@ -6,7 +6,7 @@
 	<title>Add Film</title>
 </head>
 <body>
-<div class="container">
+<div class="container pb-3 my-3 border">
 	<h1>Add Film data</h1>
 		<form th:object="${film}" th:action="@{/save}" action="#" method="post">
 		
@@ -50,6 +50,7 @@
   			</div>
     			
     		<input type="submit" class="btn btn-success" value="Save" /></input>
+    		<a href="/filmlist" class="btn btn-secondary" >Cancel</a>
 		</form>
 </div>		
 </body>

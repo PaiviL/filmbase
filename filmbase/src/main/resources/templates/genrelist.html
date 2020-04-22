@@ -6,6 +6,11 @@
 	<title>Genrelist</title>
 </head>
 <body>
+	<div class="jumbotron jumbotron-fluid text-center" style="max-height:100px">
+	  <div class="container">
+	    <h1 class="font-weight-bold">F i l m B a s e</h1>      
+	  </div>
+	</div>
 	<div class="container">
 	  <div class="row">
 		<div class="col-sm-7">
@@ -16,7 +21,7 @@
 		</div>
 		<div class="col-sm-2" style="padding:10px">
 			<form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-				<input type="submit" value="Sign Out" class="btn btn-primary"/>
+				<input type="submit" value="Sign Out" class="btn btn-secondary"/>
 			</form>
 			<div sec:authorize="isAnonymous()">
 				<a href="/login" class="btn btn-primary">Sign In</a>
@@ -38,7 +43,7 @@
 	 		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletegenre/{id}(id=${genre.genreId})}" class="btn btn-danger">Delete</a></td>
 		</tr>
 	</table>
-	<div class="container">
+	<div class="container pb-3">
 		<a href="/addgenre" class="btn btn-success" >Add Genre</a>
 	</div>
 	
