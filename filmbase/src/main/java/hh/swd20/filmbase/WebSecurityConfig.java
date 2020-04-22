@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
           .and().csrf().ignoringAntMatchers("/h2-console/**")
           .and().headers().frameOptions().sameOrigin()
           .and()
-		.authorizeRequests().antMatchers("/css/**", "/", "/filmlist").permitAll() // Enable css when logged out
+		.authorizeRequests().antMatchers("/css/**", "/", "/filmlist", "/films/**", "/genres/**").permitAll()
 		  .antMatchers("/edit/{id}", "/delete/{id}", "/deletegenre/{id}").hasAuthority("ADMIN")    
           .anyRequest().authenticated()
           .and()
